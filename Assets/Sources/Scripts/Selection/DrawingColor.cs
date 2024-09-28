@@ -8,6 +8,8 @@ public class DrawingColor : MonoBehaviour
     private SpriteRenderer _sprite;
     private Action<Color> _selectAction;
 
+    public Color Color => _sprite.color;
+
     public void Init(Action<Color> celectAction)
     {
         _sprite = GetComponent<SpriteRenderer>();

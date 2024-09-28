@@ -9,15 +9,20 @@ public class ColorSelection : MonoBehaviour
     private Pixel[] _pixels;
 
     public Color SelectedColor { get; private set; }
+    public DrawingColor[] DrawColors => _drawColors;
 
-    public void Init(Pixel[] pixelColors)
+    public void Init(Pixel[] pixelColors = null)
     {
         SelectedColor = Color.white;
-        _pixels = pixelColors;
-        _pixelSprites = new SpriteRenderer[_drawColors.Length];
 
         foreach (var color in _colors)
             color.Init(Select);
+
+        if (_drawColors == null)
+            return;
+
+        _pixels = pixelColors;
+        _pixelSprites = new SpriteRenderer[_drawColors.Length];
 
         foreach (var drawColors in _drawColors)
             drawColors.Init(Select);

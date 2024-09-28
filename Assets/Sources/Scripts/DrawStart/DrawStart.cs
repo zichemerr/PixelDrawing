@@ -5,10 +5,10 @@ public class DrawStart
     private Pixel[] _drawPixels;
     private Color _defaultColor;
 
-    public void Init(Pixel[] drawPixels)
+    public DrawStart(Pixel[] drawPixels)
     {
         _drawPixels = drawPixels;
-        _defaultColor = _drawPixels[0].Color;
+        _defaultColor = drawPixels[0].Color;
     }
 
     public bool CanStart()

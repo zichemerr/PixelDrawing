@@ -3,26 +3,17 @@
 public class DrawClean
 {
     private Pixel[] _pixels;
-    private SpriteRenderer[] _spriteRenderers;
-    private Color _defalutColor;
+    private Color _cleanColor;
 
     public DrawClean(Pixel[] pixels)
     {
         _pixels = pixels;
-        _defalutColor = Color.gray;
-        _spriteRenderers = new SpriteRenderer[pixels.Length];
-
-    }
-
-    public void Init()
-    {
-        for (int i = 0; i < _pixels.Length; i++)
-            _spriteRenderers[i] = _pixels[i].GetComponent<SpriteRenderer>();
+        _cleanColor = Color.gray;
     }
 
     public void Clear()
     {
-        foreach (var spriteRenderers in _spriteRenderers)
-            spriteRenderers.color = _defalutColor;
+        foreach (var pixels in _pixels)
+            pixels.SpriteRenderer.color = _cleanColor;
     }
 }

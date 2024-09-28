@@ -9,6 +9,7 @@ public class Pixel : MonoBehaviour
     private ColorSelection _colorSelection;
 
     public Color Color => _spriteRenderer.color;
+    public SpriteRenderer SpriteRenderer => _spriteRenderer;
     public event Action ColorChanged;
 
     public void Init(ColorSelection colorSelection)
