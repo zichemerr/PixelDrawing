@@ -5,40 +5,26 @@ public class ColorSelection : MonoBehaviour
     [SerializeField] private DrawingColor[] _colors;
     [SerializeField] private DrawingColor[] _drawColors;
 
-    private SpriteRenderer[] _pixelSprites;
-    private Pixel[] _pixels;
-
     public Color SelectedColor { get; private set; }
-    public DrawingColor[] DrawColors => _drawColors;
 
-    public void Init(Pixel[] pixelColors = null)
+    public void Init()
     {
-        SelectedColor = Color.white;
+        Clear();
 
         foreach (var color in _colors)
-            color.Init(Select);
-
-        if (_drawColors == null)
-            return;
-
-        _pixels = pixelColors;
-        _pixelSprites = new SpriteRenderer[_drawColors.Length];
+            color.Init(OnSelected);
 
         foreach (var drawColors in _drawColors)
-            drawColors.Init(Select);
-
-        for (int i = 0; i < _drawColors.Length; i++)
-            _pixelSprites[i] = _drawColors[i].GetComponent<SpriteRenderer>();
+            drawColors.Init(OnSelected);
     }
 
-    public void SetColors()
-    {
-        for (int i = 0; i < _drawColors.Length; i++)
-            _pixelSprites[i].color = _pixels[i].Color;
-    }
-
-    private void Select(Color color)
+    private void OnSelected(Color color)
     {
         SelectedColor = color;
+    }
+
+    public void Clear()
+    {
+        SelectedColor = Color.white;
     }
 }

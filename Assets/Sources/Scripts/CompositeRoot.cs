@@ -3,20 +3,27 @@ using UnityEngine;
 public class CompositeRoot : MonoBehaviour
 {
     [SerializeField] private ColorSelection _colorSelection;
-    [SerializeField] private Pixel[] _secondDraw;
-    [SerializeField] private SpriteRenderer[] _color;
-    [SerializeField] private SpriteRenderer[] _draw;
+    [SerializeField] private Level _level;
+    [SerializeField] private LevelLoader _levelLoader;
+    [SerializeField] private LevelCleaner _levelCleaner;
+    [SerializeField] private LevelReady _levelReady;
 
-    private LevelLoader _levelLoader;
+    [SerializeField] private Pixel[] _draw;
+    [SerializeField] private Pixel[] _pixelColors;
 
     private void Start()
     {
-        _levelLoader = new LevelLoader(_draw, _color);
-        _levelLoader.Load();
-
         _colorSelection.Init();
 
-        foreach (var drawPixel in _secondDraw)
-            drawPixel.Init(_colorSelection);
+        foreach (var draw in _draw)
+            draw.Init(_colorSelection);
+
+        foreach (var pixelColors in _pixelColors)
+            pixelColors.Init(_colorSelection);
+
+        _level.Init(_pixelColors);
+        _levelLoader.Init(_pixelColors);
+        _levelCleaner.Init(_levelLoader, _colorSelection, _draw);
+        _levelReady.Init(_draw);
     }
 }
