@@ -7,33 +7,29 @@ public class Level : MonoBehaviour
     [SerializeField] private LevelButton _buttonReady;
     [SerializeField] private DrawStartView _startView;
 
+    private Drawing _drawingColor;
     private DrawStart _drawStart;
-    private Pixel[] _pixelColors;
 
-    public void Init(Pixel[] pixelColors)
+    public void Init(Drawing drawingColor)
     {
-        _drawStart = new DrawStart(pixelColors, pixelColors[0].Color);
-        _pixelColors = pixelColors;
+        _drawingColor = drawingColor;
+        _drawStart = new DrawStart(_drawingColor.GetColor(0));
 
-        foreach (var pixelColor in _pixelColors)
-            pixelColor.ColorChanged += OnReady;
-
+        _drawingColor.Changed += OnReady;
         _buttonNext.Clicked += OnNext;
         _buttonBack.Clicked += OnBack;
     }
 
     private void OnDisable()
     {
-        foreach (var pixelColor in _pixelColors)
-            pixelColor.ColorChanged += OnReady;
-
+        _drawingColor.Changed -= OnReady;
         _buttonNext.Clicked -= OnNext;
         _buttonBack.Clicked -= OnBack;
     }
 
     private void OnReady()
     {
-        if (_drawStart.CanStart() == false)
+        if (_drawStart.CanStart(_drawingColor.GetColors()) == false)
             return;
 
         _buttonNext.Enable();

@@ -7,12 +7,14 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] private SpriteRenderer[] _colorSprites;
 
     private ColorLoader _colorLoader;
+    private Drawing _pixelColors;
 
     public event Action Loaded;
 
-    public void Init(Pixel[] pixelColors)
+    public void Init(Drawing pixelColors)
     {
-        _colorLoader = new ColorLoader(pixelColors, _colorSprites);
+        _pixelColors = pixelColors;
+        _colorLoader = new ColorLoader(_colorSprites);
         _buttonNext.Clicked += OnLoad;
     }
 
@@ -23,7 +25,7 @@ public class LevelLoader : MonoBehaviour
 
     private void OnLoad()
     {
-        _colorLoader.Load();
+        _colorLoader.Load(_pixelColors.GetColors());
         Loaded?.Invoke();
     }
 }

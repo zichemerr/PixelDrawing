@@ -2,18 +2,16 @@
 
 public class ColorLoader
 {
-    private Pixel[] _pixelColors;
     private SpriteRenderer[] _spriteRenderer;
 
-    public ColorLoader(Pixel[] pixelColors, SpriteRenderer[] spriteRenderer)
+    public ColorLoader(SpriteRenderer[] spriteRenderer)
     {
-        _pixelColors = pixelColors;
         _spriteRenderer = spriteRenderer;
     }
 
-    public void Load()
+    public void Load(Color[] colors)
     {
-        for (int i = 0; i < _pixelColors.Length; i++)
-            _spriteRenderer[i].color = _pixelColors[i].Color;
+        for (int i = 0; i < colors.Length; i++)
+            _spriteRenderer[i].color = colors[i];
     }
 }

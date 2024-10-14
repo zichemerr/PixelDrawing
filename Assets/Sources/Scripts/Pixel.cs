@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
-public class Pixel : MonoBehaviour, IClean
+public class Pixel : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
     private ColorSelection _colorSelection;

@@ -2,20 +2,20 @@
 
 public class DrawStart
 {
-    private Pixel[] _drawPixels;
-    private Color _defaultColor;
+    private readonly Color _defaultColor;
 
-    public DrawStart(Pixel[] drawPixels, Color defaultColor)
+    public DrawStart(Color defaultColor)
     {
-        _drawPixels = drawPixels;
         _defaultColor = defaultColor;
     }
 
-    public bool CanStart()
+    public bool CanStart(Color[] colors)
     {
-        foreach (var drawPixels in _drawPixels)
-            if (drawPixels.Color == _defaultColor)
+        for (int i = 0; i < colors.Length; i++)
+        {
+            if (colors[i] == _defaultColor)
                 return false;
+        }
 
         return true;
     }

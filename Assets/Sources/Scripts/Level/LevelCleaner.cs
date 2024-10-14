@@ -4,9 +4,9 @@ public class LevelCleaner : MonoBehaviour
 {
     private ColorSelection _colorSelection;
     private LevelLoader _levelLoader;
-    private IClean[] _clean;
+    private IClean _clean;
 
-    public void Init(LevelLoader levelLoader, ColorSelection colorSelection, IClean[] clean)
+    public void Init(LevelLoader levelLoader, ColorSelection colorSelection, IClean clean)
     {
         _levelLoader = levelLoader;
         _colorSelection = colorSelection;
@@ -22,8 +22,6 @@ public class LevelCleaner : MonoBehaviour
     private void OnClean()
     {
         _colorSelection.Clear();
-
-        foreach (var clean in _clean)
-            clean.Clear();
+        _clean.Clear();
     }
 }

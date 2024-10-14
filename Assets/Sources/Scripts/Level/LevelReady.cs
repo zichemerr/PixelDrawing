@@ -6,34 +6,31 @@ public class LevelReady : MonoBehaviour
     [SerializeField] private LevelButton _buttonReady;
 
     private DrawStart _drawStart;
-    private Pixel[] _draws;
     private Drawing _secondDrawing;
 
-    public void Init(Pixel[] draws, Drawing secondDrawing)
+    public void Init(Drawing secondDrawing)
     {
-        _draws = draws;
         _secondDrawing = secondDrawing;
-        _drawStart = new DrawStart(draws, Color.gray);
-
-        foreach (var draw in draws)
-            draw.ColorChanged += OnDrawChanged;
-
+        _drawStart = new DrawStart(Color.gray);
         _levelStart.Init();
+
+        _secondDrawing.Changed += OnDrawChanged;
         _buttonReady.Clicked += OnReady;
     }
 
     private void OnDisable()
     {
+        _secondDrawing.Changed -= OnDrawChanged;
         _buttonReady.Clicked -= OnReady;
-
-        foreach (var draw in _draws)
-            draw.ColorChanged -= OnDrawChanged;
     }
 
     private void OnDrawChanged()
     {
-        if (_drawStart.CanStart() == false)
+        if (_drawStart.CanStart(_secondDrawing.GetColors()) == false)
+        {
+            Debug.Log("Почему так?");
             return;
+        }
 
         _buttonReady.Enable();
     }
