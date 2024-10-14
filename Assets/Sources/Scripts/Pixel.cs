@@ -12,6 +12,8 @@ public class Pixel : MonoBehaviour, IClean
 
     public event Action ColorChanged;
 
+    public bool _isActive = true;
+
     public void Init(ColorSelection colorSelection)
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -31,6 +33,9 @@ public class Pixel : MonoBehaviour, IClean
 
     private void SetColor(Color color)
     {
+        if (_isActive == false)
+            return;
+
         _spriteRenderer.color = color;
         ColorChanged?.Invoke();
     }
@@ -38,5 +43,10 @@ public class Pixel : MonoBehaviour, IClean
     public void Clear()
     {
         _spriteRenderer.color = Color.gray;
+    }
+
+    public void Disable()
+    {
+        _isActive = false;
     }
 }

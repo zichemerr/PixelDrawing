@@ -2,22 +2,23 @@
 
 public class LevelReady : MonoBehaviour
 {
+    [SerializeField] private LevelStart _levelStart;
     [SerializeField] private LevelButton _buttonReady;
 
     private DrawStart _drawStart;
     private Pixel[] _draws;
+    private Drawing _secondDrawing;
 
-    public void Init(Pixel[] draws)
+    public void Init(Pixel[] draws, Drawing secondDrawing)
     {
         _draws = draws;
+        _secondDrawing = secondDrawing;
         _drawStart = new DrawStart(draws, Color.gray);
 
         foreach (var draw in draws)
             draw.ColorChanged += OnDrawChanged;
-    }
 
-    private void OnEnable()
-    {
+        _levelStart.Init();
         _buttonReady.Clicked += OnReady;
     }
 
@@ -39,6 +40,8 @@ public class LevelReady : MonoBehaviour
 
     private void OnReady()
     {
-        Debug.Log("Ready");
+        _buttonReady.Disable();
+        _secondDrawing.Disable();
+        _levelStart.StartLevel();
     }
 }
