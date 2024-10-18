@@ -9,8 +9,6 @@ public class ColorSelection : MonoBehaviour
 
     public void Init()
     {
-        Clear();
-
         foreach (var color in _colors)
             color.Init(OnSelected);
 
@@ -25,6 +23,6 @@ public class ColorSelection : MonoBehaviour
 
     public void Clear()
     {
-        SelectedColor = Color.white;
+        SelectedColor = new Color();
     }
 }

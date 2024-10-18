@@ -2,19 +2,10 @@
 
 public class Comparison
 {
-    private readonly Pixel[] _firstDrawing;
-    private readonly Pixel[] _secondDrawing;
-
-    public Comparison(Pixel[] firstDrawing, Pixel[] secondDrawing)
+    public bool CheckCompare(Color[] firstDrawing, Color[] secondDrawing)
     {
-        _firstDrawing = firstDrawing;
-        _secondDrawing = secondDrawing;
-    }
-
-    public bool CheckCompare()
-    {
-        for (int i = 0; i < _firstDrawing.Length; i++)
-            if (_firstDrawing[i].Color != _secondDrawing[i].Color)
+        for (int i = 0; i < firstDrawing.Length; i++)
+            if (firstDrawing[i] != secondDrawing[i])
                 return false;
 
         return true;

@@ -3,29 +3,29 @@ using UnityEngine;
 
 public class ComparisonRoot : MonoBehaviour
 {
+    private Drawing _firstDrawing;
+    private Drawing _secondDrawing;
     private Comparison _comparison;
-    private Pixel[] _secondDrawing;
 
     public event Action Finished;
 
-    public void Init(Pixel[] firstDrawing, Pixel[] secondDrawing)
+    public void Init(Drawing firstDrawing, Drawing secondDrawing)
     {
+        _comparison = new Comparison();
+        _firstDrawing = firstDrawing;
         _secondDrawing = secondDrawing;
-        _comparison = new Comparison(firstDrawing, secondDrawing);
 
-        foreach (var secondDrawings in _secondDrawing)
-            secondDrawings.ColorChanged += OnColorChanged;
+        _firstDrawing.Changed += OnDrawChanged;
     }
 
     private void OnDisable()
     {
-        foreach (var secondDrawings in _secondDrawing)
-            secondDrawings.ColorChanged -= OnColorChanged;
+        _firstDrawing.Changed -= OnDrawChanged;
     }
 
-    private void OnColorChanged()
+    private void OnDrawChanged()
     {
-        if (_comparison.CheckCompare())
+        if (_comparison.CheckCompare(_firstDrawing.GetColors(), _secondDrawing.GetColors()))
             Finished?.Invoke();
     }
 }

@@ -33,7 +33,7 @@ public class Pixel : MonoBehaviour
 
     private void SetColor(Color color)
     {
-        if (_isActive == false)
+        if (_isActive == false || color == new Color())
             return;
 
         _spriteRenderer.color = color;

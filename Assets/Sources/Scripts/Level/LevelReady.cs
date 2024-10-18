@@ -4,6 +4,7 @@ public class LevelReady : MonoBehaviour
 {
     [SerializeField] private LevelStart _levelStart;
     [SerializeField] private LevelButton _buttonReady;
+    [SerializeField] private LevelButton _buttonBack;
 
     private DrawStart _drawStart;
     private Drawing _secondDrawing;
@@ -27,10 +28,7 @@ public class LevelReady : MonoBehaviour
     private void OnDrawChanged()
     {
         if (_drawStart.CanStart(_secondDrawing.GetColors()) == false)
-        {
-            Debug.Log("Почему так?");
             return;
-        }
 
         _buttonReady.Enable();
     }
@@ -40,5 +38,6 @@ public class LevelReady : MonoBehaviour
         _buttonReady.Disable();
         _secondDrawing.Disable();
         _levelStart.StartLevel();
+        _buttonBack.Disable();
     }
 }

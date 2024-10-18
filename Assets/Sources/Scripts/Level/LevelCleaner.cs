@@ -4,13 +4,14 @@ public class LevelCleaner : MonoBehaviour
 {
     private ColorSelection _colorSelection;
     private LevelLoader _levelLoader;
-    private IClean _clean;
+    private IClean _secondDraw;
 
-    public void Init(LevelLoader levelLoader, ColorSelection colorSelection, IClean clean)
+    public void Init(LevelLoader levelLoader,
+        ColorSelection colorSelection, IClean secondDraw)
     {
         _levelLoader = levelLoader;
         _colorSelection = colorSelection;
-        _clean = clean;
+        _secondDraw = secondDraw;
         _levelLoader.Loaded += OnClean;
     }
 
@@ -22,6 +23,6 @@ public class LevelCleaner : MonoBehaviour
     private void OnClean()
     {
         _colorSelection.Clear();
-        _clean.Clear();
+        _secondDraw.Clear();
     }
 }
