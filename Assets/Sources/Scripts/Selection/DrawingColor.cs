@@ -6,11 +6,11 @@ using System;
 public class DrawingColor : MonoBehaviour
 {
     private SpriteRenderer _sprite;
-    private Action<Color> _selectAction;
+    private Action<DrawingColor> _selectAction;
 
     public Color Color => _sprite.color;
 
-    public void Init(Action<Color> celectAction)
+    public void Init(Action<DrawingColor> celectAction)
     {
         _sprite = GetComponent<SpriteRenderer>();
         _selectAction = celectAction;
@@ -18,6 +18,6 @@ public class DrawingColor : MonoBehaviour
 
     private void OnMouseDown()
     {
-        _selectAction?.Invoke(_sprite.color);
+        _selectAction?.Invoke(this);
     }
 }

@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Border : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Activate(Vector2 point)
     {
-        
+        gameObject.SetActive(true);
+        transform.position = point;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Disable()
     {
-        
+        gameObject.SetActive(false);
     }
 }

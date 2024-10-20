@@ -4,6 +4,7 @@ public class ColorSelection : MonoBehaviour
 {
     [SerializeField] private DrawingColor[] _colors;
     [SerializeField] private DrawingColor[] _drawColors;
+    [SerializeField] private Border _border;
 
     public Color SelectedColor { get; private set; }
 
@@ -16,9 +17,10 @@ public class ColorSelection : MonoBehaviour
             drawColors.Init(OnSelected);
     }
 
-    private void OnSelected(Color color)
+    private void OnSelected(DrawingColor drawingColor)
     {
-        SelectedColor = color;
+        SelectedColor = drawingColor.Color;
+        _border.Activate(drawingColor.transform.position);
     }
 
     public void Clear()

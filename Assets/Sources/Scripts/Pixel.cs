@@ -12,7 +12,7 @@ public class Pixel : MonoBehaviour
 
     public event Action ColorChanged;
 
-    public bool _isActive = true;
+    public bool IsActive { get; private set; } = true;
 
     public void Init(ColorSelection colorSelection)
     {
@@ -33,7 +33,7 @@ public class Pixel : MonoBehaviour
 
     private void SetColor(Color color)
     {
-        if (_isActive == false || color == new Color())
+        if (IsActive == false || color == new Color())
             return;
 
         _spriteRenderer.color = color;
@@ -47,6 +47,6 @@ public class Pixel : MonoBehaviour
 
     public void Disable()
     {
-        _isActive = false;
+        IsActive = false;
     }
 }

@@ -6,6 +6,7 @@ public class Level : MonoBehaviour
     [SerializeField] private LevelButton _buttonBack;
     [SerializeField] private LevelButton _buttonReady;
     [SerializeField] private DrawStartView _startView;
+    [SerializeField] private Border _border;
 
     private Drawing _drawingColor;
     private DrawStart _drawStart;
@@ -40,6 +41,7 @@ public class Level : MonoBehaviour
         _buttonNext.Disable();
         _startView.Enable();
         _buttonBack.Enable();
+        _border.Disable();
     }
 
     private void OnBack()
